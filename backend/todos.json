@@ -1,1 +1,7 @@
-[]
+[
+  {
+    "id": 2,
+    "task": "hello",
+    "completed": true
+  }
+]
