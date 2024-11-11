@@ -87,6 +87,7 @@ button#add-btn:hover {
 .todo-item span {
   display: block;
   overflow: hidden;
+  width: 100%;
 
 }
 
