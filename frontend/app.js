@@ -1,14 +1,44 @@
+
 const apiUrl = 'http://localhost:3001/todos';
 const addButton = document.getElementById('add-btn');
 const input = document.getElementById('todo-input');
 const todoList = document.getElementById('todo-list');
+const timeCard = document.getElementById('time-card');
+const dayCard = document.getElementById('day-card');
+const completionChartCanvas = document.getElementById('completion-chart').getContext('2d');
+
+// Initialize chart
+let completionChart = new Chart(completionChartCanvas, {
+  type: 'doughnut',
+  data: {
+    datasets: [{
+      data: [0, 1], // Initially, 0% completed
+      backgroundColor: ['#4caf50', '#e4e4e4'],
+      borderWidth: 0
+    }]
+  },
+  options: {
+    cutoutPercentage: 70,
+    responsive: true,
+    plugins: {
+      tooltip: {
+        enabled: false
+      },
+      legend: {
+        display: false
+      }
+    }
+  }
+});
 
 addButton.addEventListener('click', addTodo);
 window.onload = loadTodos;
+setInterval(updateTimeAndDay, 1000); // Update every second
 
 async function loadTodos() {
   const todos = await fetch(apiUrl).then(res => res.json());
   todoList.innerHTML = todos.map(todoHTML).join('');
+  updateCompletionChart(todos); // Update chart when todos are loaded
 }
 
 async function addTodo() {
@@ -32,17 +62,19 @@ async function updateOrDelete(id, action, newTask) {
 }
 
 function todoHTML({ id, task, completed }) {
-  const itemBackground = completed ? '#d3f9d8' : '#ffe6e6';  // Soft green for completed, pink for incomplete
-  const textColor = completed ? '#2e8b57' : '#4b4b4b'; // Dark green for completed, gray for incomplete
+  const itemBackground = completed ? '#d3f9d8' : '#2e2d2c';
+  const textColor = completed ? '#2e8b57' : '#b4b4b4;';
 
   return `
     <li class="todo-item" style="background-color: ${itemBackground}; color: ${textColor};">
       <span>${task}</span>
-      <button onclick="updateOrDelete(${id}, 'PUT', { completed: ${!completed} })">
-        ${completed ? 'Undo' : 'Complete'}
-      </button>
-      <button onclick="showEdit(${id}, '${task}')">Edit</button>
-      <button onclick="deleteTodo(${id})">Delete</button> <!-- Delete button calls deleteTodo -->
+      <div class="todo-buttons">
+        <button class="todo-item-btn" onclick="updateOrDelete(${id}, 'PUT', { completed: ${!completed} })">
+          ${completed ? 'Undo' : 'Complete'}
+        </button>
+        <button class="todo-item-btn" onclick="showEdit(${id}, '${task}')">Edit</button>
+        <button class="todo-item-btn delete-btn" onclick="deleteTodo(${id})">Delete</button>
+      </div>
     </li>
   `;
 }
@@ -59,10 +91,29 @@ function submitEdit(id) {
   if (updatedTask.trim()) updateOrDelete(id, 'PUT', { task: updatedTask.trim() });
 }
 
-// Function to delete a specific todo by ID
 async function deleteTodo(id) {
   await fetch(`${apiUrl}/${id}`, {
     method: 'DELETE',
   });
-  loadTodos(); // Reload the todos list after deletion
+  loadTodos();
+}
+
+function updateCompletionChart(todos) {
+  const completedTasks = todos.filter(todo => todo.completed).length;
+  const totalTasks = todos.length;
+  const completedPercentage = totalTasks > 0 ? (completedTasks / totalTasks) * 100 : 0;
+
+  completionChart.data.datasets[0].data = [completedPercentage, 100 - completedPercentage];
+  completionChart.update();
+}
+
+function updateTimeAndDay() {
+  const now = new Date();
+  const hours = now.getHours().toString().padStart(2, '0');
+  const minutes = now.getMinutes().toString().padStart(2, '0');
+  const seconds = now.getSeconds().toString().padStart(2, '0');
+
+  const day = now.toLocaleString('en-US', { weekday: 'long' });
+  timeCard.textContent = `${hours}:${minutes}:${seconds}`;
+  dayCard.textContent = day;
 }

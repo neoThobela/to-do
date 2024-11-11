@@ -6,16 +6,31 @@
   <title>To-Do List</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> 
 </head>
 <body>
   <div class="container">
-    <h1>🌸 My To-Do List 🌸</h1>
+    <h1>My To-Do List</h1>
+    
+    <!-- Card for Time and Date -->
+    <div class="card">
+      <h2 id="time-card">Loading time...</h2>
+      <p id="day-card">Loading day...</p>
+    </div>
+    
+    <!-- Card for Completion Status -->
+    <div class="card">
+      <h2>Completion Status</h2>
+      <canvas id="completion-chart" width="100px" height="100px"></canvas>
+    </div>
+  
     <div class="input-group">
       <input id="todo-input" placeholder="What do you need to do?" />
       <button id="add-btn">Add</button>
     </div>
     <ul id="todo-list"></ul>
   </div>
+  
   <script src="app.js"></script>
 </body>
 </html>
