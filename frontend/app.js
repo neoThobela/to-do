@@ -7,13 +7,75 @@ const timeCard = document.getElementById('time-card');
 const dayCard = document.getElementById('day-card');
 const completionChartCanvas = document.getElementById('completion-chart').getContext('2d');
 
+// const addButton = document.getElementById('add-btn');
+// const input = document.getElementById('todo-input');
+const dateInput = document.getElementById('todo-date'); // Date input element
+// const todoList = document.getElementById('todo-list');
+
+// Modified addTodo function to include due date
+async function addTodo() {
+  if (!input.value.trim()) return;
+  
+  await fetch(apiUrl, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      task: input.value.trim(),
+      dueDate: dateInput.value, // Save due date
+      completed: false
+    })
+  });
+  
+  input.value = '';
+  dateInput.value = ''; // Clear date input
+  loadTodos();
+}
+
+// Modified todoHTML function to include due date, checkbox, and icons
+function todoHTML({ id, task, completed, dueDate }) {
+  const itemBackground = completed ? '#d3f9d8' : '#2e2d2c';
+  const textColor = completed ? '#2e8b57' : '#b4b4b4';
+
+  return `
+    <li class="todo-item" style="background-color: ${itemBackground}; color: ${textColor};">
+      <input type="checkbox" class="todo-checkbox" ${completed ? 'checked' : ''} onclick="toggleComplete(${id}, ${!completed})">
+      <span>${task}</span>
+      ${dueDate ? `<div class="todo-date">Due: ${dueDate}</div>` : ''}
+      <div class="todo-buttons">
+        <button class="todo-icon edit-btn" onclick="showEdit(${id}, '${task}')"></button>
+        <button class="todo-icon delete-btn" onclick="deleteTodo(${id})"></button>
+      </div>
+    </li>
+  `;
+}
+
+// New function to toggle completion status
+async function toggleComplete(id, completed) {
+  await fetch(`${apiUrl}/${id}`, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ completed })
+  });
+  loadTodos();
+}
+
+// Modify submitEdit function to handle date editing if needed
+function submitEdit(id) {
+  const updatedTask = document.getElementById(`edit-${id}`).value;
+  if (updatedTask.trim()) updateOrDelete(id, 'PUT', { task: updatedTask.trim() });
+}
+
+// No change to deleteTodo, update time display, or completion chart
+
+
 // Initialize chart
 let completionChart = new Chart(completionChartCanvas, {
   type: 'doughnut',
   data: {
     datasets: [{
       data: [0, 1], // Initially, 0% completed
-      backgroundColor: ['#4caf50', '#e4e4e4'],
+      backgroundColor: ['#7AF17A', '#e4e4e4'],
+      
       borderWidth: 0
     }]
   },
@@ -61,23 +123,23 @@ async function updateOrDelete(id, action, newTask) {
   loadTodos();
 }
 
-function todoHTML({ id, task, completed }) {
-  const itemBackground = completed ? '#d3f9d8' : '#2e2d2c';
-  const textColor = completed ? '#2e8b57' : '#b4b4b4;';
+// function todoHTML({ id, task, completed }) {
+//   const itemBackground = completed ? '#d3f9d8' : '#2e2d2c';
+//   const textColor = completed ? '#2e8b57' : '#b4b4b4;';
 
-  return `
-    <li class="todo-item" style="background-color: ${itemBackground}; color: ${textColor};">
-      <span>${task}</span>
-      <div class="todo-buttons">
-        <button class="todo-item-btn" onclick="updateOrDelete(${id}, 'PUT', { completed: ${!completed} })">
-          ${completed ? 'Undo' : 'Complete'}
-        </button>
-        <button class="todo-item-btn" onclick="showEdit(${id}, '${task}')">Edit</button>
-        <button class="todo-item-btn delete-btn" onclick="deleteTodo(${id})">Delete</button>
-      </div>
-    </li>
-  `;
-}
+//   return `
+//     <li class="todo-item" style="background-color: ${itemBackground}; color: ${textColor};">
+//       <span>${task}</span>
+//       <div class="todo-buttons">
+//         <button class="todo-item-btn" onclick="updateOrDelete(${id}, 'PUT', { completed: ${!completed} })">
+//           ${completed ? 'Undo' : 'Complete'}
+//         </button>
+//         <button class="todo-item-btn" onclick="showEdit(${id}, '${task}')">Edit</button>
+//         <button class="todo-item-btn delete-btn" onclick="deleteTodo(${id})">Delete</button>
+//       </div>
+//     </li>
+//   `;
+// }
 
 function showEdit(id, currentTask) {
   todoList.innerHTML = todoList.innerHTML.replace(
@@ -116,4 +178,25 @@ function updateTimeAndDay() {
   const day = now.toLocaleString('en-US', { weekday: 'long' });
   timeCard.textContent = `${hours}:${minutes}:${seconds}`;
   dayCard.textContent = day;
+}
+function updateCompletionChart(todos) {
+  const completedTasks = todos.filter(todo => todo.completed).length;
+  const totalTasks = todos.length;
+  const completedPercentage = totalTasks > 0 ? (completedTasks / totalTasks) * 100 : 0;
+
+  // Update chart data
+  completionChart.data.datasets[0].data = [completedPercentage, 100 - completedPercentage];
+  completionChart.update();
+
+  // Update motivational message
+  const motivationMessage = document.getElementById('motivation-message');
+  if (completedPercentage === 0) {
+    motivationMessage.textContent = "Let's get started on those tasks!";
+  } else if (completedPercentage < 50) {
+    motivationMessage.textContent = "Good start! Keep going!";
+  } else if (completedPercentage < 100) {
+    motivationMessage.textContent = "Almost there! Just a few more to go!";
+  } else {
+    motivationMessage.textContent = "Great job! You've completed all your tasks!";
+  }
 }
