@@ -31,6 +31,13 @@ h1 {
   color: #eae3da;
   margin-bottom: 20px;
 }
+#motivation-message {
+  font-size: 24px;
+  color: #ff8f05;
+  margin-top: 10px;
+  font-weight: 600;
+}
+   
 
 .card {
   background-color: #333;
