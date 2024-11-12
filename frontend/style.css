@@ -214,11 +214,7 @@ button.todo-item-btn.delete-btn:active {
   color: inherit;
   margin-bottom: 10px; 
   width: 100%;
-  display: flex;
-    flex-wrap: nowrap;
-    align-content: flex-start;
-    justify-content: space-between;
-    align-items: flex-end;
+  text-align: left;
 }
 
 .todo-buttons {
