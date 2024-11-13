@@ -32,16 +32,19 @@
     </div>
 
     <div class="input-group">
-      <div class="flex">
-      <label for="todo-input">Add To List:</label>
-      <input id="todo-input" placeholder="What do you need to do?" />
-    </div>
-      <div class="datetime-picker-container">
-        <label for="todo-date">Due Date:</label>
-        <input type="date" id="todo-date" placeholder="Select a date" />
+      <div class="flex-row">
+        <div class="input-container">
+          <label for="todo-input">Add To List:</label>
+          <input id="todo-input" placeholder="What do you need to do?" />
+        </div>
+        <div class="datetime-picker-container">
+          <label for="todo-date">Due Date:</label>
+          <input type="date" id="todo-date" placeholder="Select a date" />
+        </div>
       </div>
       <button id="add-btn">Add</button>
     </div>
+    
 
     <ul id="todo-list"></ul>
     

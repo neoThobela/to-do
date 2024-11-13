@@ -7,12 +7,11 @@
 
 body {
   font-family: 'Poppins', sans-serif;
-  background: linear-gradient(to right, #1a1818 , rgb(71, 71, 69));
+  background: linear-gradient(to right, #1a1818, rgb(71, 71, 69));
   color: #f7f3f3;
   display: flex;
   justify-content: center;
   align-items: center;
-  /* height: 100vh; */
 }
 
 .container {
@@ -46,41 +45,72 @@ h1 {
   padding: 20px;
   color: #f7f3f3;
   width: 48%;
-}
-
-.time-card, .completion-card {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
 }
 
 /* Input and Button */
 .input-group {
   display: flex;
-  gap: 10px;
-  justify-content: center;
-  margin-bottom: 20px;
-  height: 70px;
-}
-.flex{
-  display: flex;
   flex-direction: column;
-  justify-items: right;
-  
-}
-input#todo-input {
-  flex: 1;
-  padding: 6px 10px; /* Reduce padding to make it shorter vertically */
-  font-size: 14px; /* Optional: decrease font size for a more compact look */
-  border: 2px solid #7AF17A;
-  border-radius: 8px;
-  outline: none;
-  background: #403e3e;
-  color: #f7f3f3;
+  gap: 15px;
+  align-items: center;
+  width: 100%;
 }
 
-/* Basic styling for icons */
+.flex-row {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+  max-width: 600px;
+  width: 100%;
+}
+
+.input-container, .datetime-picker-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+input#todo-input, input#todo-date {
+  width: 100%;
+  padding: 10px 12px;
+  font-size: 14px;
+  border: 2px solid #7AF17A;
+  border-radius: 8px;
+  background: #403e3e;
+  color: #f7f3f3;
+  height: 40px;
+}
+
+#add-btn {
+  padding: 12px 330px;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  background-color: #7AF17A;
+  color: white;
+  max-width: 200px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  margin-top: 20px;
+}
+
+#add-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#add-btn:active {
+  transform: translateY(1px);
+  box-shadow: none;
+}
+
+/* Icon Styling */
 .icon {
   font-size: 24px;
   display: inline-flex;
@@ -90,18 +120,17 @@ input#todo-input {
   height: 50px;
   border-radius: 50%;
   margin: 10px;
-  position: relative;
   cursor: pointer;
+  position: relative;
   transition: transform 0.2s;
 }
 
-
-/* Hover effect */
 .icon:hover {
   transform: scale(1.1);
 }
-
-/* Tooltip styling */
+span{
+  text-align: left;
+  width: 40%;}
 .tooltip {
   visibility: hidden;
   background-color: black;
@@ -115,33 +144,12 @@ input#todo-input {
   transform: translateX(-50%);
   white-space: nowrap;
   font-size: 12px;
-  line-height: 1;
 }
-
+.span{
+  text-align: left;
+}
 .icon:hover .tooltip {
   visibility: visible;
-}
-
-
-#add-btn{
-  padding: 10px 20px;
-  border: none;
-  border-radius: 8px;
-  font-weight: bold;
-  cursor: pointer;
-  background-color: #7AF17A;
-  color: white;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-button:active {
-  transform: translateY(1px);
-  box-shadow: none;
 }
 
 /* Todo List */
@@ -177,26 +185,6 @@ button:active {
 .todo-buttons {
   display: flex;
   gap: 5px;
-}
-
-/* Date Picker */
-.datetime-picker-container {
-  margin-bottom: 20px;
-  text-align: left;
-}
-
-#todo-date {
-  width: 100%;
-  padding: 12px;
-  font-size: 16px;
-  border: 2px solid #ccc;
-  border-radius: 8px;
-  background-color: #f7f7f7;
-}
-
-#todo-date:focus {
-  border-color: #5c6bc0;
-  background-color: #e8eaf6;
 }
 
 /* Completion Chart */
