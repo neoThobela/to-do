@@ -123,24 +123,6 @@ async function updateOrDelete(id, action, newTask) {
   loadTodos();
 }
 
-// function todoHTML({ id, task, completed }) {
-//   const itemBackground = completed ? '#d3f9d8' : '#2e2d2c';
-//   const textColor = completed ? '#2e8b57' : '#b4b4b4;';
-
-//   return `
-//     <li class="todo-item" style="background-color: ${itemBackground}; color: ${textColor};">
-//       <span>${task}</span>
-//       <div class="todo-buttons">
-//         <button class="todo-item-btn" onclick="updateOrDelete(${id}, 'PUT', { completed: ${!completed} })">
-//           ${completed ? 'Undo' : 'Complete'}
-//         </button>
-//         <button class="todo-item-btn" onclick="showEdit(${id}, '${task}')">Edit</button>
-//         <button class="todo-item-btn delete-btn" onclick="deleteTodo(${id})">Delete</button>
-//       </div>
-//     </li>
-//   `;
-// }
-
 function showEdit(id, currentTask) {
   todoList.innerHTML = todoList.innerHTML.replace(
     `<span>${currentTask}</span>`,

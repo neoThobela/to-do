@@ -90,7 +90,7 @@ button#add-btn {
 }
 
 button#add-btn:hover {
-  background-color: #e8af8d;
+  background-color: #c8e88d;
 }
 
 
@@ -127,10 +127,6 @@ button#add-btn {
   border-radius: 50px;
 }
 
-button#add-btn:hover {
-  background-color: #e8af8d; 
-}
-/* Checkbox styling */
 .todo-checkbox {
   width: 20px;
   height: 20px;
@@ -138,12 +134,6 @@ button#add-btn:hover {
   cursor: pointer;
 }
 
-/* Date styling */
-.todo-date {
-  font-size: 12px;
-  color: #b4b4b4;
-  margin-top: 5px;
-}
 
 /* Icon buttons */
 .todo-icon {
@@ -244,18 +234,11 @@ button.todo-item-btn:active {
   box-shadow: none;
 }
 
-button.todo-item-btn.delete-btn {
-  background-color: #e74c3c;
-  color: white;
-}
+/* 
 
-button.todo-item-btn.delete-btn:hover {
-  background-color: #c0392b;
-}
 
-button.todo-item-btn.delete-btn:active {
-  background-color: #e74c3c;
-}
+
+
 
 
 button.todo-item-btn.complete-btn {
