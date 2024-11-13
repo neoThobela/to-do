@@ -17,7 +17,7 @@ app.use(bodyParser.json());
 
 // Path to the JSON file that stores to-dos
 const todoFilePath = path.join(__dirname, 'todos.json');
-
+console.log()
 // Helper functions to read/write to the JSON file
 function readTodos() {
   if (fs.existsSync(todoFilePath)) {

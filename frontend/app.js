@@ -59,7 +59,7 @@ async function toggleComplete(id, completed) {
   loadTodos();
 }
 
-// Modify submitEdit function to handle date editing if needed
+// M submitEdit function to handle date editing if needed
 function submitEdit(id) {
   const updatedTask = document.getElementById(`edit-${id}`).value;
   if (updatedTask.trim()) updateOrDelete(id, 'PUT', { task: updatedTask.trim() });
