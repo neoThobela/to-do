@@ -6,41 +6,47 @@
   <title>To-Do List</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> 
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- Add this link to the head section to include Font Awesome icons -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
 </head>
 <body>
   <div class="container">
-    
     <h1>My To-Do List</h1>
     
-    <!-- Card for Time and Date -->
-    <div class="card">
-      <h2 id="time-card">Loading time...</h2>
-      <p id="day-card">Loading day...</p>
+    <!-- Flex Container for Time and Completion Status Cards -->
+    <div class="cards-wrapper">
+      <!-- Card for Time and Date -->
+      <div class="card time-card">
+        <h2 id="time-card">Loading time...</h2>
+        <p id="day-card">Loading day...</p>
+      </div>
+
+      <!-- Card for Completion Status -->
+      <div class="card completion-card">
+        <h2>Completion Status</h2>
+        <canvas id="completion-chart" width="150" height="150"></canvas> <!-- Smaller pie chart -->
+        <p id="motivation-message">Let's get started on those tasks!</p>
+      </div>
     </div>
-    
-    <!-- Card for Completion Status -->
-    <div class="card">
-      <h2>Completion Status</h2>
-      <canvas id="completion-chart" width="100px" height="100px"></canvas>
-      <p id="motivation-message">Let's get started on those tasks!</p>
-    </div>
-    
-    
+
     <div class="input-group">
+      <div class="flex">
+      <label for="todo-input">Add To List:</label>
       <input id="todo-input" placeholder="What do you need to do?" />
-      <input type="date" id="todo-date" placeholder="Due Date" />
+    </div>
+      <div class="datetime-picker-container">
+        <label for="todo-date">Due Date:</label>
+        <input type="date" id="todo-date" placeholder="Select a date" />
+      </div>
       <button id="add-btn">Add</button>
     </div>
+
     <ul id="todo-list"></ul>
     
-    <!-- <div class="input-group">
-      <input id="todo-input" placeholder="What do you need to do?" />
-      <button id="add-btn">Add</button>
-    </div>
-    <ul id="todo-list"></ul>
-  </div> -->
-  
+  </div>
+
   <script src="app.js"></script>
 </body>
 </html>
