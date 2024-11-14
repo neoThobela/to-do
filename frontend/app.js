@@ -120,36 +120,71 @@ function updateTimeAndDay() {
 // Update the Completion Chart with current data
 function updateCompletionChart(todos) {
   const totalTodos = todos.length;
-  const completedTodos = todos.filter(todo => todo.completed).length;
-  const data = {
-    labels: ['Completed', 'Pending'],
-    datasets: [{
-      data: [completedTodos, totalTodos - completedTodos],
-      backgroundColor: ['#4caf50', '#ffb300'],
-      borderColor: ['#4caf50', '#ffb300'],
-      borderWidth: 1
-    }]
-  };
 
-  new Chart(completionChartCanvas, {
-    type: 'pie',
-    data,
-    options: {
-      responsive: true,
-      plugins: {
-        legend: {
-          position: 'top',
-        },
-        tooltip: {
-          callbacks: {
-            label: function(tooltipItem) {
-              return `${tooltipItem.label}: ${tooltipItem.raw} tasks`;
+  // If no todos exist, display an empty chart
+  if (totalTodos === 0) {
+    const data = {
+      labels: ['No Tasks'],
+      datasets: [{
+        data: [1], // Represents the "empty" state
+        backgroundColor: ['#f7f3f3'], // Light gray or empty color
+        borderColor: ['#f7f3f3'],
+        borderWidth: 1
+      }]
+    };
+
+    new Chart(completionChartCanvas, {
+      type: 'pie',
+      data,
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            position: 'top',
+            labels: {
+              color: '#f7f3f3', // Light color for the label
+            }
+          },
+          tooltip: {
+            enabled: false // Disable tooltips for the empty chart
+          }
+        }
+      }
+    });
+  } else {
+    // If there are tasks, show the normal completion chart
+    const completedTodos = todos.filter(todo => todo.completed).length;
+    const data = {
+      labels: ['Completed', 'Pending'],
+      datasets: [{
+        data: [completedTodos, totalTodos - completedTodos],
+        backgroundColor: ['#4caf50', '#ffb300'],
+        borderColor: ['#4caf50', '#ffb300'],
+        borderWidth: 1
+      }]
+    };
+
+    new Chart(completionChartCanvas, {
+      type: 'pie',
+      data,
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            position: 'top',
+          },
+          tooltip: {
+            callbacks: {
+              label: function(tooltipItem) {
+                return `${tooltipItem.label}: ${tooltipItem.raw} tasks`;
+              }
             }
           }
         }
       }
-    }
-  });
+    });
+  }
 }
+
 
 addButton.addEventListener('click', addTodo);
