@@ -1,14 +1,3 @@
 [
-  {
-    "id": 1,
-    "task": "HI",
-    "completed": true,
-    "dueDate": "2024-11-14"
-  },
-  {
-    "id": 2,
-    "task": "HI",
-    "completed": true,
-    "dueDate": "2024-11-14"
-  }
+
 ]

@@ -1,4 +1,4 @@
-/* Global Styles */
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -7,35 +7,39 @@
 
 body {
   font-family: 'Poppins', sans-serif;
-  background: linear-gradient(to right, #1a1818, rgb(71, 71, 69));  /* Original dark gradient */
-  color: #f7f3f3;  /* Light text for better readability */
+  background: linear-gradient(to right, #1a1818, rgb(71, 71, 69));  
+  color: #f7f3f3;  
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  transition: background 0.3s ease-in-out;  /* Smooth background transition */
+  transition: background 0.3s ease-in-out;  
+  padding: 20px; 
+  width: 100%;
+  overflow-x: hidden;
 }
 
 .container {
   max-width: 700px;
   width: 100%;
-  background: #403e3e;  /* Darker container with original color */
+  background: #403e3e; 
   padding: 25px;
   border-radius: 15px;
-  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.3);  /* Larger shadow for better separation */
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.3);  
   text-align: center;
   margin-top: 70px;
-  transition: transform 0.3s ease-out;  /* Smooth transform on hover */
+  transition: transform 0.3s ease-out;  
+  width: 100%;
+  overflow: hidden;
 }
 
 h1 {
   font-weight: 600;
-  color: #eae3da;  /* Original off-white text for headings */
+  color: #eae3da;  
   margin-bottom: 25px;
-  animation: fadeIn 1s ease-out;  /* Fade-in animation for heading */
+  animation: fadeIn 1s ease-out; 
 }
 
-/* Fade-in animation */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -47,30 +51,31 @@ h1 {
   }
 }
 
-/* Card Layout */
+
 .cards-wrapper {
   display: flex;
   justify-content: space-between;
   gap: 20px;
   margin-bottom: 25px;
+  flex-wrap: wrap;
 }
 
 .card {
-  background-color: #333;  /* Original dark gray for cards */
+  background-color: #333;  
   border-radius: 10px;
   padding: 25px;
   color: #f7f3f3;
-  width: 48%;
+  width: 48%; 
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);  /* Slight shadow to lift the card */
-  transition: transform 0.3s ease;  /* Smooth transform on hover */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);  
+  transition: transform 0.3s ease; 
 }
 
 .card:hover {
-  transform: translateY(-5px);  /* Lift on hover */
+  transform: translateY(-5px); 
 }
 
 .card h2 {
@@ -78,7 +83,7 @@ h1 {
   margin-bottom: 15px;
 }
 
-/* Input and Button */
+
 .input-group {
   display: flex;
   flex-direction: column;
@@ -94,6 +99,7 @@ h1 {
   justify-content: center;
   max-width: 600px;
   width: 100%;
+  flex-wrap: wrap;
 }
 
 .input-container, .datetime-picker-container {
@@ -107,16 +113,16 @@ input#todo-input, input#todo-date {
   width: 100%;
   padding: 12px;
   font-size: 14px;
-  border: 2px solid #7AF17A;  /* Original soft green border */
+  border: 2px solid #7AF17A;  
   border-radius: 8px;
-  background: #403e3e;  /* Original dark background for inputs */
+  background: #403e3e;
   color: #f7f3f3;
   height: 45px;
-  transition: border-color 0.3s ease;  /* Smooth transition for input focus */
+  transition: border-color 0.3s ease; 
 }
 
 input#todo-input:focus, input#todo-date:focus {
-  border-color: #4CAF50;  /* Slightly brighter green on focus for clarity */
+  border-color: #4CAF50; 
 }
 
 #add-btn {
@@ -125,7 +131,7 @@ input#todo-input:focus, input#todo-date:focus {
   border-radius: 8px;
   font-weight: bold;
   cursor: pointer;
-  background-color: #7AF17A;  /* Original green for buttons */
+  background-color: #7AF17A;  
   color: white;
   max-width: 220px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -137,7 +143,7 @@ input#todo-input:focus, input#todo-date:focus {
 
 #add-btn:hover {
   transform: translateY(-5px);
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);  /* Slight shadow for hover */
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);  
 }
 
 #add-btn:active {
@@ -145,7 +151,7 @@ input#todo-input:focus, input#todo-date:focus {
   box-shadow: none;
 }
 
-/* Icon Styling */
+
 .icon {
   font-size: 24px;
   display: inline-flex;
@@ -157,12 +163,13 @@ input#todo-input:focus, input#todo-date:focus {
   margin: 10px;
   cursor: pointer;
   position: relative;
-  transition: transform 0.2s ease; 
+  transition: transform 0.2s ease;
   color: #f7f3f3;
 }
 
 .icon:hover {
-  transform: scale(1.2);  
+  transform: scale(1.2); 
+ 
 }
 
 .icon:hover .tooltip {
@@ -171,7 +178,7 @@ input#todo-input:focus, input#todo-date:focus {
 
 .tooltip {
   visibility: hidden;
-  background-color: #797878;  
+  background-color: #3a3a50;  
   color: #fff;
   text-align: center;
   border-radius: 5px;
@@ -185,7 +192,7 @@ input#todo-input:focus, input#todo-date:focus {
   width: 100%;
 }
 
-/* Todo List */
+
 #todo-list {
   list-style: none;
   padding: 0;
@@ -193,7 +200,7 @@ input#todo-input:focus, input#todo-date:focus {
 }
 
 .todo-item {
-  background-color: #7AF17A;  /* Green background for todo items */
+  background-color: #7AF17A; 
   margin: 12px 0;
   padding: 12px 18px;
   border-radius: 8px;
@@ -201,30 +208,30 @@ input#todo-input:focus, input#todo-date:focus {
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  color: #2e2e2e;  /* Dark text for todo items */
+  color: #2e2e2e; 
   transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .todo-item:hover {
-  background-color: #66d466;  /* Slight hover effect to make tasks stand out */
-  transform: translateY(-3px);  /* Lift effect on hover */
+  background-color: #66d466;  
+  transform: translateY(-3px); 
 }
 
 .todo-checkbox {
   width: 20px;
   height: 20px;
-  accent-color: #4caf50;  /* Slightly darker green for checkboxes */
+  accent-color: #4caf50;  
   cursor: pointer;
-  transition: transform 0.2s ease;  /* Smooth checkbox animation */
+  transition: transform 0.2s ease;  
 }
 
 .todo-checkbox:checked {
-  transform: scale(1.2);  /* Checkbox scaling effect when checked */
+  transform: scale(1.2); 
 }
 
 .todo-date {
   font-size: 12px;
-  color: #b0b0b0;  /* Muted text color for date */
+  color: #b0b0b0;  
 }
 
 .todo-buttons {
@@ -232,20 +239,64 @@ input#todo-input:focus, input#todo-date:focus {
   gap: 5px;
 }
 
-/* Completion Chart */
 #completion-chart {
   margin-top: 20px;
   max-width: 150px;
   max-height: 150px;
-  animation: fadeIn 1s ease-out;  /* Fade-in effect for chart */
+  animation: fadeIn 1s ease-out;  
 }
 
-/* Motivational Message */
+
 #motivation-message {
   font-size: 18px;
-  color: #7AF17A;  /* Green for motivational message */
+  color: #7AF17A; 
   margin-top: 10px;
   font-weight: 600;
-  animation: fadeIn 1s ease-out;  /* Fade-in effect for motivational text */
+  animation: fadeIn 1s ease-out;  
 }
 
+
+@media (max-width: 768px) {
+  .cards-wrapper {
+    flex-direction: column; 
+    gap: 20px;
+  }
+
+  .card {
+    width: 100%;
+    padding: 15px;
+  }
+
+  .flex-row {
+    flex-direction: column; 
+    gap: 15px;
+  }
+
+  .input-container, .datetime-picker-container {
+    width: 100%;
+  }
+
+  #add-btn {
+    width: 100%;
+    padding: 15px;
+  }
+
+  h1 {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 20px; 
+  }
+
+  .card h2 {
+    font-size: 18px;
+  }
+
+  #completion-chart {
+    max-width: 120px;
+    max-height: 120px;
+  }
+}
