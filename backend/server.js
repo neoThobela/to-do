@@ -17,7 +17,7 @@ app.use(bodyParser.json());
 
 // Path to the JSON file that stores to-dos
 const todoFilePath = path.join(__dirname, 'todos.json');
-console.log()
+
 // Helper functions to read/write to the JSON file
 function readTodos() {
   if (fs.existsSync(todoFilePath)) {
@@ -42,9 +42,11 @@ app.get('/todos', (req, res) => {
   res.json(todos);
 });
 
-// Create a new to-do
 app.post('/todos', (req, res) => {
-  const { task } = req.body;
+  console.log('Received data:', req.body); // Log the incoming request body
+
+  const { task, dueDate } = req.body;
+
   if (!task) {
     return res.status(400).json({ error: 'Task is required' });
   }
@@ -53,13 +55,39 @@ app.post('/todos', (req, res) => {
   const newTodo = {
     id: todos.length + 1,
     task,
-    completed: false
+    completed: false,
+    dueDate: dueDate || null, // Default to null if no dueDate is provided
   };
 
   todos.push(newTodo);
   writeTodos(todos);
-  res.status(201).json(newTodo);
+
+  console.log('New todo added:', newTodo); // Log the new todo for debugging
+
+  res.status(201).json(newTodo); // Send the new todo back as response
 });
+
+
+
+// Create a new to-do
+// app.post('/todos', (req, res) => {
+//   const { task } = req.body;
+//   if (!task) {
+//     return res.status(400).json({ error: 'Task is required' });
+//   }
+
+//   const todos = readTodos();
+//   const newTodo = {
+//     id: todos.length + 1,
+//     task,
+//     completed: false,
+//     ueDate: dueDate || null
+//   };
+
+//   todos.push(newTodo);
+//   writeTodos(todos);
+//   res.status(201).json(newTodo);
+// });
 
 // Update a to-do
 app.put('/todos/:id', (req, res) => {
