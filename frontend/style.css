@@ -39,7 +39,10 @@ h1 {
   margin-bottom: 25px;
   animation: fadeIn 1s ease-out; 
 }
-
+span{
+  width:50%;
+  text-align: left;
+}
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -133,7 +136,7 @@ input#todo-input:focus, input#todo-date:focus {
   cursor: pointer;
   background-color: #7AF17A;  
   color: white;
-  max-width: 220px;
+  width: 602px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   margin-top: 20px;
   display: inline-flex;
