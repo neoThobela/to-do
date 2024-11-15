@@ -1,20 +1,8 @@
 [
   {
     "id": 1,
-    "task": "hi",
+    "task": "take the dog out for a walk",
     "completed": false,
-    "dueDate": "2024-11-13"
-  },
-  {
-    "id": 2,
-    "task": "vfdvfv fvfvf fdvfd fvfv fdvdvf  vvrvfe f r f",
-    "completed": true,
-    "dueDate": "2024-11-13"
-  },
-  {
-    "id": 3,
-    "task": "ervrrtgikhgtfg gvrfcdccvgbhybg gfcdxfgvbhvgfc grvfcdxgbvfc gtrgvfcdgrfc grvfdbhtgvfrcd gtrfctgfd",
-    "completed": false,
-    "dueDate": "2024-11-13"
+    "dueDate": "2024-11-15"
   }
 ]
