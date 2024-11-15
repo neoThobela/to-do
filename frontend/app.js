@@ -13,6 +13,14 @@ window.onload = function() {
   loadTodos();
   setInterval(updateTimeAndDay, 1000);
 };
+const dateInput = document.getElementById('todo-date');
+
+
+window.onload = function() {
+  dateInput.value = new Date().toISOString().split('T')[0];
+  loadTodos();
+  setInterval(updateTimeAndDay, 1000);
+};
 
 // Modified addTodo function to include due date
 async function addTodo() {
@@ -37,8 +45,30 @@ async function addTodo() {
   } catch (error) {
     console.error('Error adding todo:', error);
   }
+  const taskValue = input.value.trim();
+  const dueDateValue = dateInput.value;
+
+  // Check if both task and due date are provided
+  if (!taskValue || !dueDateValue) {
+    alert("Both the task and the due date are required.");
+    return; // Stop the function execution if validation fails
+  }
+
+  try {
+    await fetch(apiUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ task: taskValue, dueDate: dueDateValue, completed: false })
+    });
+    input.value = ''; // Clear the input fields after adding
+    dateInput.value = ''; 
+    loadTodos();
+  } catch (error) {
+    console.error('Error adding todo:', error);
+  }
 }
 
+// Display Todo HTML with due date
 // Display Todo HTML with due date
 function todoHTML({ id, task, completed, dueDate }) {
   const itemBackground = completed ? '#d3f9d8' : '#2e2d2c';
@@ -57,11 +87,21 @@ function todoHTML({ id, task, completed, dueDate }) {
        <div onclick="deleteTodo(${id})" class="icon delete-icon">
     🗑️
     <span class="tooltip">Delete</span
+      ${dueDate ? `<div class="todo-date">Due: ${new Date(dueDate).toLocaleDateString()}</div>` : ''}
+      <div >
+            <div  onclick="showEdit(${id}, '${task}')" class="icon edit-icon">
+    ✏️
+    <span class="tooltip">Edit</span>
+  </div>
+       <div onclick="deleteTodo(${id})" class="icon delete-icon">
+    🗑️
+    <span class="tooltip">Delete</span
       </div>
     </li>
   `;
 }
 
+// Toggle Todo completion
 // Toggle Todo completion
 async function toggleComplete(id, completed) {
   await fetch(`${apiUrl}/${id}`, {
@@ -72,6 +112,7 @@ async function toggleComplete(id, completed) {
   loadTodos();
 }
 
+// Edit Todo functionality
 // Edit Todo functionality
 function showEdit(id, currentTask) {
   todoList.innerHTML = todoList.innerHTML.replace(
@@ -93,7 +134,19 @@ function submitEdit(id) {
 }
 
 // Delete Todo
+  if (updatedTask) {
+    fetch(`${apiUrl}/${id}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ task: updatedTask })
+    });
+  }
+  loadTodos();
+}
+
+// Delete Todo
 async function deleteTodo(id) {
+  await fetch(`${apiUrl}/${id}`, { method: 'DELETE' });
   await fetch(`${apiUrl}/${id}`, { method: 'DELETE' });
   loadTodos();
 }
@@ -111,11 +164,28 @@ async function loadTodos() {
 }
 
 // Update Time and Day on the cards
+// Load Todos from API
+async function loadTodos() {
+  try {
+    const response = await fetch(apiUrl);
+    const todos = await response.json();
+    todoList.innerHTML = todos.map(todoHTML).join('');
+    updateCompletionChart(todos);
+  } catch (error) {
+    console.error('Error loading todos:', error);
+  }
+}
+
+// Update Time and Day on the cards
 function updateTimeAndDay() {
   const now = new Date();
   timeCard.textContent = now.toLocaleTimeString();
   dayCard.textContent = now.toLocaleDateString();
+  timeCard.textContent = now.toLocaleTimeString();
+  dayCard.textContent = now.toLocaleDateString();
 }
+
+// Update the Completion Chart with current data
 
 // Update the Completion Chart with current data
 function updateCompletionChart(todos) {
