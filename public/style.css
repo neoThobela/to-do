@@ -1,0 +1,204 @@
+/* Global Styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(to right, #1a1818, rgb(71, 71, 69));
+  color: #f7f3f3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  max-width: 700px;
+  width: 100%;
+  background: #403e3e;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  margin-top: 70px;
+}
+
+h1 {
+  font-weight: 600;
+  color: #eae3da;
+  margin-bottom: 20px;
+}
+
+/* Card Layout */
+.cards-wrapper {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.card {
+  background-color: #333;
+  border-radius: 10px;
+  padding: 20px;
+  color: #f7f3f3;
+  width: 48%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Input and Button */
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: center;
+  width: 100%;
+}
+
+.flex-row {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+  max-width: 600px;
+  width: 100%;
+}
+
+.input-container, .datetime-picker-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+input#todo-input, input#todo-date {
+  width: 100%;
+  padding: 10px 12px;
+  font-size: 14px;
+  border: 2px solid #7AF17A;
+  border-radius: 8px;
+  background: #403e3e;
+  color: #f7f3f3;
+  height: 40px;
+}
+
+#add-btn {
+  padding: 12px 330px;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  background-color: #7AF17A;
+  color: white;
+  max-width: 200px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  margin-top: 20px;
+}
+
+#add-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#add-btn:active {
+  transform: translateY(1px);
+  box-shadow: none;
+}
+
+/* Icon Styling */
+.icon {
+  font-size: 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin: 10px;
+  cursor: pointer;
+  position: relative;
+  transition: transform 0.2s;
+}
+
+.icon:hover {
+  transform: scale(1.1);
+}
+span{
+  text-align: left;
+  width: 40%;}
+.tooltip {
+  visibility: hidden;
+  background-color: rgb(95, 95, 95);
+  color: #fff;
+  text-align: center;
+  border-radius: 5px;
+  padding: 5px;
+  position: absolute;
+  bottom: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  font-size: 12px;
+  width: 100%;
+}
+.span{
+  text-align: left;
+}
+.icon:hover .tooltip {
+  visibility: visible;
+}
+
+/* Todo List */
+#todo-list {
+  list-style: none;
+  padding: 0;
+  margin-top: 20px;
+}
+
+.todo-item {
+  background-color: #7AF17A;
+  margin: 10px 0;
+  padding: 10px 15px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.todo-checkbox {
+  width: 20px;
+  height: 20px;
+  accent-color: #4caf50;
+  cursor: pointer;
+}
+
+.todo-date {
+  font-size: 12px;
+  color: #b4b4b4;
+}
+
+.todo-buttons {
+  display: flex;
+  gap: 5px;
+}
+
+/* Completion Chart */
+#completion-chart {
+  margin-top: 20px;
+  max-width: 150px;
+  max-height: 150px;
+}
+
+/* Motivational Message */
+#motivation-message {
+  font-size: 18px;
+  color: #7AF17A;
+  margin-top: 10px;
+  font-weight: 600;
+}
