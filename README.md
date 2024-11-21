@@ -67,7 +67,8 @@ Completion Chart: Encourages productivity with a colorful pie chart.
 Found a bug? Have an idea? Contributions are welcome! Open an issue or submit a pull request. 🛠️✨
 
 
-it is live at 
+demo
 
-https://to-do-1-j8zd.onrender.com
+https://github.com/user-attachments/assets/3a3cdba2-b05d-4745-8f4a-53a01cd0a084
+ https://to-do-1-j8zd.onrender.com
 
